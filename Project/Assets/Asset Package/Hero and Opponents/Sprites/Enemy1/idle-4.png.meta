@@ -1,0 +1,192 @@
+fileFormatVersion: 2
+guid: 07091af46495fa14eb73edfdc9f6bda9
+AssetOrigin:
+  serializedVersion: 1
+  productId: 140776
+  packageName: Hero nad Opponents Animation
+  packageVersion: 1.0
+  assetPath: Assets/Hero and Opponents/Sprites/Enemy1/idle-4.png
+  uploadId: 296716
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 3, y: 0, z: 72, w: 34}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: idle-4_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 54
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37d5ab9f6ae16914f814c52b39404ff1
+      internalID: 1602341913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline:
+    - - {x: -36, y: -32}
+      - {x: -27.168228, y: -22.18692}
+      - {x: -28, y: -33}
+      - {x: -28, y: -48}
+      - {x: -19, y: -48}
+      - {x: -19, y: -47}
+      - {x: -22, y: -44}
+      - {x: -19, y: -45}
+      - {x: -19, y: -47}
+      - {x: -18, y: -48}
+      - {x: -10, y: -48}
+      - {x: -10, y: 13}
+      - {x: -11, y: 14}
+      - {x: -25, y: 14}
+      - {x: -63, y: -38}
+      - {x: -63, y: -48}
+      - {x: -53, y: -48}
+    - - {x: 22, y: -5}
+      - {x: 22, y: 9}
+      - {x: 21, y: 10}
+      - {x: 15, y: 10}
+      - {x: 12, y: 3}
+      - {x: 19, y: -6}
+    - - {x: 18, y: -21}
+      - {x: 18, y: -10}
+      - {x: 13, y: -10}
+      - {x: 12, y: -11}
+      - {x: 12, y: -16}
+      - {x: 13, y: -20}
+      - {x: 15, y: -22}
+    - - {x: -60, y: -20}
+      - {x: -58, y: -18}
+      - {x: -58, y: -16}
+      - {x: -60, y: -14}
+      - {x: -64, y: -14}
+      - {x: -64, y: -21}
+    - - {x: -30, y: -40}
+      - {x: -30, y: -37}
+      - {x: -32, y: -35}
+      - {x: -36, y: -34}
+      - {x: -38, y: -36}
+      - {x: -38, y: -40}
+      - {x: -36, y: -42}
+      - {x: -32, y: -42}
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d5b79730f73773444a1b688b5dc99c7d
+    internalID: -2140640521
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      idle-4_0: 1602341913
+      idle-4_1: -1665329262
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
