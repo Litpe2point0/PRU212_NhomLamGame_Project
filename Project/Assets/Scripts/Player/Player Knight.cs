@@ -164,7 +164,7 @@ public class PlayerKnight : MonoBehaviour
         {
             // Reset timer
             m_delayToIdle = 0.05f;
-            m_animator.SetInteger("AnimState", 1);
+            m_animator.SetBool("isWalking", true);
         }
 
         //Idle
@@ -173,7 +173,7 @@ public class PlayerKnight : MonoBehaviour
             // Prevents flickering transitions to idle
             m_delayToIdle -= Time.deltaTime;
             if (m_delayToIdle < 0)
-                m_animator.SetInteger("AnimState", 0);
+                m_animator.SetBool("isWalking", false);
         }
 
 

@@ -237,67 +237,6 @@ MonoBehaviour:
     CameraRadius: 0.2
     DampingIntoCollision: 0
     DampingFromCollision: 0.5
---- !u!1001 &305866532
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1797967585509512881, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: parryWindowTime
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6323719953710832613, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: m_Name
-      value: PlayerKnight
-      objectReference: {fileID: 0}
-    - target: {fileID: 8413529789942519730, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 8413529789942519730, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.53
-      objectReference: {fileID: 0}
-    - target: {fileID: 8413529789942519730, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8413529789942519730, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8413529789942519730, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8413529789942519730, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8413529789942519730, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8413529789942519730, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8413529789942519730, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8413529789942519730, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +369,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.51, y: 0.87, z: -3}
+  m_LocalPosition: {x: -2.281868, y: 0.87, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2584,11 +2523,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!4 &1952242789 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8413529789942519730, guid: 5a29a6687fe4f874cba0eb35f3aa7e97, type: 3}
-  m_PrefabInstance: {fileID: 305866532}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2461894908567714376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2599,7 +2533,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6040906709072018349, guid: 9d459289edc258248ab8c0259506e17d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.51
+      value: -2.281868
       objectReference: {fileID: 0}
     - target: {fileID: 6040906709072018349, guid: 9d459289edc258248ab8c0259506e17d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2648,7 +2582,7 @@ PrefabInstance:
     - target: {fileID: 6929986877422368017, guid: 9d459289edc258248ab8c0259506e17d, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 1952242789}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2666,4 +2600,3 @@ SceneRoots:
   - {fileID: 600245052}
   - {fileID: 2461894908567714376}
   - {fileID: 1488513709}
-  - {fileID: 305866532}
