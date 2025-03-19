@@ -1,36 +1,22 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerSwitch : MonoBehaviour
 {
-    [SerializeField] private GameObject playerKnight;
-    [SerializeField] private GameObject playerWizard;
+    [SerializeField] private GameObject player1;
+    [SerializeField] private GameObject player2;
     [SerializeField] private bool player1Active = true;
+    [SerializeField] private CinemachineCamera cc;
 
-    private PlayerKnight pkS;
-    private FollowPoint pkFP;
-    private Health pkH;
-
-    private PlayerWizard pwS;
-    private FollowPoint pwFP;
-    private Health pwH;
     private void Awake()
     {
-        pkS = playerKnight.GetComponent<PlayerKnight>();
-        pkFP = playerKnight.GetComponent<FollowPoint>();
-        pkH = playerKnight.GetComponent<Health>();
-        pwS = playerWizard.GetComponent<PlayerWizard>();
-        pwFP = playerWizard.GetComponent<FollowPoint>();
-        pwH = playerWizard.GetComponent<Health>();
     }
     void Start()
     {
-        pkS.enabled = true;
-        pkFP.enabled = false;
-        pkH.enabled = true;
-
-        pwS.enabled = false;
-        pwFP.enabled = true;
-        pwH.enabled = false;
+        cc.Follow = player1.transform;
+        cc.LookAt = player1.transform;
+        player1.SetActive(true);
+        player2.SetActive(false);
     }
     void Update()
     {
@@ -43,25 +29,23 @@ public class PlayerSwitch : MonoBehaviour
     {
         if(player1Active)
         {
-            pkS.enabled = !player1Active;
-            pkFP.enabled = player1Active;
-            pkH.enabled = !player1Active;
+            player2.transform.position = player1.transform.position;
 
-            pwS.enabled = player1Active;
-            pwFP.enabled = !player1Active;
-            pwH.enabled = player1Active;
-
+            player1.SetActive(false);
+            player2.SetActive(true);
+            cc.Follow = player2.transform;
+            cc.LookAt = player2.transform;
             player1Active = false;
         }
         else
         {
-            pkS.enabled = !player1Active;
-            pkFP.enabled = player1Active;
-            pkH.enabled = !player1Active;
+            player1.transform.position = player2.transform.position;
 
-            pwS.enabled = player1Active;
-            pwFP.enabled = !player1Active;
-            pwH.enabled = player1Active;
+            player1.SetActive(true);
+            player2.SetActive(false);
+            cc.Follow = player1.transform;
+            cc.LookAt = player1.transform;
+            player1Active = true;
         }
     }
 }
