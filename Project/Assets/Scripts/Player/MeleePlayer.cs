@@ -41,6 +41,8 @@ public class MeleePlayer : MonoBehaviour
     {
         if (InRange())
         {
+            if (enemyHealth.GetComponent<Animator>() != null)
+                if (enemyHealth.GetComponent<Animator>().GetBool("isDeath")) return;
             enemyHealth.TakeDamage(damage);
         }
     }

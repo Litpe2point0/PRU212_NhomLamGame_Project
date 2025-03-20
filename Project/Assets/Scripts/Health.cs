@@ -35,7 +35,11 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, health);
-        if(currentHealth > 0)
+        if (GetComponentInParent<GreatswordSkeletonSwitch>() != null)
+        {
+            GetComponentInParent<GreatswordSkeletonSwitch>().TakeDamage(damage);
+        }
+        if (currentHealth > 0)
         {
             anim.SetTrigger("Hurt");
             StartCoroutine(InvunerabilityFrames());
@@ -59,6 +63,14 @@ public class Health : MonoBehaviour
                 if(GetComponent<EnemyPatrol>() != null)
                 {
                     GetComponentInParent<EnemyPatrol>().enabled = false;
+                }
+                if (GetComponent<GreatswordSkeletonAttack>() != null)
+                {
+                    GetComponent<GreatswordSkeletonAttack>().enabled = false;
+                }
+                if (GetComponent<GreatswordSkeletonMovement>() != null)
+                {
+                    GetComponent<GreatswordSkeletonMovement>().enabled = false;
                 }
                 isDead = true;
             }
@@ -95,6 +107,14 @@ public class Health : MonoBehaviour
             {
                 GetComponent<EnemyPatrol>().enabled = false;
             }
+            if (GetComponent<GreatswordSkeletonAttack>() != null)
+            {
+                GetComponent<GreatswordSkeletonAttack>().enabled = false;
+            }
+            if (GetComponent<GreatswordSkeletonMovement>() != null)
+            {
+                GetComponent<GreatswordSkeletonMovement>().enabled = false;
+            }
             StartStunEffect(stunDuration, flashSpeed);
             StartCoroutine(RecoverFromStun());
         }
@@ -118,6 +138,14 @@ public class Health : MonoBehaviour
             if (GetComponent<EnemyPatrol>() != null)
             {
                 GetComponent<EnemyPatrol>().enabled = true;
+            }
+            if (GetComponent<GreatswordSkeletonAttack>() != null)
+            {
+                GetComponent<GreatswordSkeletonAttack>().enabled = true;
+            }
+            if (GetComponent<GreatswordSkeletonMovement>() != null)
+            {
+                GetComponent<GreatswordSkeletonMovement>().enabled = true;
             }
         }
     }
@@ -145,5 +173,18 @@ public class Health : MonoBehaviour
     public bool IsDead()
     {
         return isDead;
+    }
+    public void SetMaxHealth(float newHealth)
+    {
+        health = newHealth;
+        currentHealth = health;
+    }
+    public void SetCurrentHealth(float health)
+    {
+        currentHealth = health;
+    }
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
     }
 }
