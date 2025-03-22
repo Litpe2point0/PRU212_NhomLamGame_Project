@@ -36,6 +36,7 @@ public class PlayerKnight : MonoBehaviour
     private bool isOnSlope;
     private Vector3 initScale;
     private BlockAndParry bap;
+    private Health playerHealth;
     private void Awake()
     {
         initScale = transform.localScale;
@@ -52,6 +53,7 @@ public class PlayerKnight : MonoBehaviour
         m_wallSensorL2 = transform.Find("WallSensor_L2").GetComponent<Sensor_PlayerKnight>();
         base_speed = m_speed;
         bap = GetComponent<BlockAndParry>();
+        playerHealth = GetComponent<Health>();
     }
 
     // Update is called once per frame
@@ -219,6 +221,7 @@ public class PlayerKnight : MonoBehaviour
         m_rolling = true;
         m_body2d.bodyType = RigidbodyType2D.Dynamic;
         m_animator.SetTrigger("Roll");
+        playerHealth.SetInvunerbility(true);
         Physics2D.IgnoreLayerCollision(7, 10, true);
         m_body2d.linearVelocity = new Vector2(m_facingDirection * m_rollForce, m_body2d.linearVelocity.y);
         StartCoroutine(ReenableCollision(0.5f));
@@ -226,6 +229,7 @@ public class PlayerKnight : MonoBehaviour
     IEnumerator ReenableCollision(float delay)
     {
         yield return new WaitForSeconds(delay);
+        playerHealth.SetInvunerbility(false);
         Physics2D.IgnoreLayerCollision(7, 10, false);
     }
     void OnMove(InputValue value)
@@ -252,5 +256,13 @@ public class PlayerKnight : MonoBehaviour
             dust.transform.localScale = new Vector3(m_facingDirection, 1, 1);
         }
     }
-    
+    public void ResetInput()
+    {
+        moveInput = Vector2.zero;  // 🛠 Reset movement input
+        if (m_body2d != null)
+        {
+            m_body2d.linearVelocity = Vector2.zero;  // 🛠 Stop velocity
+            m_body2d.angularVelocity = 0f;
+        }
+    }
 }

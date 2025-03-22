@@ -1,4 +1,4 @@
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -140,5 +140,14 @@ public class PlayerWizard : MonoBehaviour
     public void Fire()
     {
         rangePlayer.Attack();
+    }
+    public void ResetInput()
+    {
+        moveInput = Vector2.zero;  // 🛠 Reset movement input
+        if (m_body2d != null)
+        {
+            m_body2d.linearVelocity = Vector2.zero;  // 🛠 Stop velocity
+            m_body2d.angularVelocity = 0f;
+        }
     }
 }

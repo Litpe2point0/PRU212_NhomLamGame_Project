@@ -1753,7 +1753,7 @@ Transform:
   m_GameObject: {fileID: 4790604648171303397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9028681, y: -0.5423298, z: 0.10152994}
+  m_LocalPosition: {x: -2.33, y: -3.12, z: 0.10152994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1778,6 +1778,7 @@ MonoBehaviour:
   player2: {fileID: 1301564439666040130}
   player1Active: 1
   cc: {fileID: 0}
+  switchCooldown: 2
 --- !u!1 &5196715060738636464
 GameObject:
   m_ObjectHideFlags: 0

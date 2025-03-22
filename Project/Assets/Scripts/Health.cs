@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float stunDuration = 1.5f;
     private bool isStunned = false;
 
+    private bool isInvunerable = false;
     private SpriteRenderer spriteRenderer;
     private Animator anim;
     void Start()
@@ -34,6 +35,10 @@ public class Health : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        if(isInvunerable)
+        {
+            return;
+        }
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, health);
         if (GetComponentInParent<GreatswordSkeletonSwitch>() != null)
         {
@@ -41,8 +46,15 @@ public class Health : MonoBehaviour
         }
         if (currentHealth > 0)
         {
-            anim.SetTrigger("Hurt");
-            StartCoroutine(InvunerabilityFrames());
+            if (GetComponent<PlayerKnight>() != null)
+            {
+                anim.SetTrigger("Hurt");
+                StartCoroutine(InvunerabilityFrames(iFrameDuration, numberOfFlashes));
+            }
+            else
+            {
+                StartCoroutine(FlashSprite(iFrameDuration, numberOfFlashes));
+            }
         }
         else
         {
@@ -72,12 +84,29 @@ public class Health : MonoBehaviour
                 {
                     GetComponent<GreatswordSkeletonMovement>().enabled = false;
                 }
+                if(GetComponent<BringerOfDeathAttack>() != null)
+                {
+                    GetComponent<BringerOfDeathAttack>().enabled = false;
+                }
+                if (GetComponent<BringerOfDeathMovement>() != null)
+                {
+                    GetComponent<BringerOfDeathMovement>().enabled = false;
+                }
+                if(GetComponent<DarkWizardAttack>() != null)
+                {
+                    GetComponent<DarkWizardAttack>().enabled = false;
+                }
+                if (GetComponent<DarkWizardMovement>() != null)
+                {
+                    GetComponent<DarkWizardMovement>().enabled = false;
+                }
                 isDead = true;
             }
         }
     }
-    private IEnumerator InvunerabilityFrames()
+    private IEnumerator InvunerabilityFrames(float iFrameDuration, float numberOfFlashes)
     {
+        isInvunerable = true;
         Physics2D.IgnoreLayerCollision(7, 10, true);
         for (int i = 0; i < numberOfFlashes; i++)
         {
@@ -86,6 +115,7 @@ public class Health : MonoBehaviour
             spriteRenderer.color = Color.white;
             yield return new WaitForSeconds(iFrameDuration / (numberOfFlashes * 2));
         }
+        isInvunerable = false;
         Physics2D.IgnoreLayerCollision(7, 10, false);
     }
     public void Stun()
@@ -114,6 +144,22 @@ public class Health : MonoBehaviour
             if (GetComponent<GreatswordSkeletonMovement>() != null)
             {
                 GetComponent<GreatswordSkeletonMovement>().enabled = false;
+            }
+            if (GetComponent<BringerOfDeathAttack>() != null)
+            {
+                GetComponent<BringerOfDeathAttack>().enabled = false;
+            }
+            if (GetComponent<BringerOfDeathMovement>() != null)
+            {
+                GetComponent<BringerOfDeathMovement>().enabled = false;
+            }
+            if (GetComponent<DarkWizardAttack>() != null)
+            {
+                GetComponent<DarkWizardAttack>().enabled = false;
+            }
+            if (GetComponent<DarkWizardMovement>() != null)
+            {
+                GetComponent<DarkWizardMovement>().enabled = false;
             }
             StartStunEffect(stunDuration, flashSpeed);
             StartCoroutine(RecoverFromStun());
@@ -147,13 +193,40 @@ public class Health : MonoBehaviour
             {
                 GetComponent<GreatswordSkeletonMovement>().enabled = true;
             }
+            if (GetComponent<BringerOfDeathAttack>() != null)
+            {
+                GetComponent<BringerOfDeathAttack>().enabled = true;
+            }
+            if (GetComponent<BringerOfDeathMovement>() != null)
+            {
+                GetComponent<BringerOfDeathMovement>().enabled = true;
+            }
+            if (GetComponent<DarkWizardAttack>() != null)
+            {
+                GetComponent<DarkWizardAttack>().enabled = true;
+            }
+            if (GetComponent<DarkWizardMovement>() != null)
+            {
+                GetComponent<DarkWizardMovement>().enabled = true;
+            }
         }
     }
     public void StartStunEffect(float duration, float flashSpeed)
     {
         StartCoroutine(StunFlashEffect(duration, flashSpeed));
     }
+    private IEnumerator FlashSprite(float duration, float flashes)
+    {
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
 
+        for (int i = 0; i < flashes; i++)
+        {
+            sprite.color = new Color(1, 1, 1, 0.3f); // Transparent effect
+            yield return new WaitForSeconds(duration / (flashes * 2));
+            sprite.color = Color.white; // Normal color
+            yield return new WaitForSeconds(duration / (flashes * 2));
+        }
+    }
     private IEnumerator StunFlashEffect(float duration, float flashSpeed)
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
@@ -186,5 +259,13 @@ public class Health : MonoBehaviour
     public float GetCurrentHealth()
     {
         return currentHealth;
+    }
+    public float GetMaxHealth()
+    {
+        return health;
+    }
+    public void SetInvunerbility(bool value)
+    {
+        isInvunerable = value;
     }
 }

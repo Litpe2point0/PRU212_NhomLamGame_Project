@@ -62,6 +62,7 @@ public class FireWizardAttack : MonoBehaviour
                     }
                 }
             }
+            playerHealth.SetInvunerbility(false);
             playerHealth.TakeDamage(damage);
             damage = baseDamage;
         }
