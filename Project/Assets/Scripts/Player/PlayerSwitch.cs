@@ -122,4 +122,30 @@ public class PlayerSwitch : MonoBehaviour
         // 🔹 Toggle active player
         player1Active = (newPlayer == player1);
     }
+    public float GetCurrentPlayerHealth()
+    {
+        if (player1Active)
+        {
+            return player1.GetComponent<Health>().GetCurrentHealth();
+        }
+        else
+        {
+            return player2.GetComponent<Health>().GetCurrentHealth();
+        }
+    }
+    public float GetCurrentPlayerMaxHealth()
+    {
+        if (player1Active)
+        {
+            return player1.GetComponent<Health>().GetMaxHealth();
+        }
+        else
+        {
+            return player2.GetComponent<Health>().GetMaxHealth();
+        }
+    }
+    public bool GetPlayer1Active()
+    {
+        return player1Active;
+    }
 }
