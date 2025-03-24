@@ -12,7 +12,7 @@ public class FireWizardMovement : MonoBehaviour
     [SerializeField] private Transform maxX;
 
     [Header("Target")]
-    [SerializeField] private Transform player;
+    [SerializeField] private PlayerSwitch playerSwitch;
 
     [Header("Dive Attack Parameter")]
     [SerializeField] private float diveSpeed;
@@ -25,6 +25,7 @@ public class FireWizardMovement : MonoBehaviour
     private float floatHeight;
     private FireWizardAttack attack;
     private Animator anim;
+    private Transform player;
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -38,6 +39,7 @@ public class FireWizardMovement : MonoBehaviour
     }
     void Update()
     {
+        CheckCurrentPlayer();
         FlipSprite();
         if(!isAttacking)
         {
@@ -56,6 +58,17 @@ public class FireWizardMovement : MonoBehaviour
             DiveAttack();
         }
         MoveForward();
+    }
+    void CheckCurrentPlayer()
+    {
+        if(playerSwitch.GetPlayer1Active())
+        {
+            player = playerSwitch.GetPlayer1().transform;
+        }
+        else
+        {
+            player = playerSwitch.GetPlayer2().transform;
+        }
     }
     void DiveAttack()
     {

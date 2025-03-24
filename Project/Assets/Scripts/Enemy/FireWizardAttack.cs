@@ -19,11 +19,12 @@ public class FireWizardAttack : MonoBehaviour
     private float baseDamage;
     private Animator anim;
     private Health playerHealth;
-
+    private AudioPlayer audioPlayer;
     private void Awake()
     {
         baseDamage = damage;
         anim = GetComponent<Animator>();
+        audioPlayer = FindFirstObjectByType<AudioPlayer>();
     }
     private bool PlayerInSight()
     {
@@ -70,6 +71,7 @@ public class FireWizardAttack : MonoBehaviour
     public void FlameThrowerAttack()
     {
         anim.SetBool("isAttacking", true);
+        audioPlayer.PlayFireBreathingClip();
         anim.SetBool("isWalking", false);
         StartCoroutine(FlameThrower());
     }

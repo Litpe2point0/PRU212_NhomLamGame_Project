@@ -9,10 +9,12 @@ public class Projectile : MonoBehaviour
 
     private BoxCollider2D boxCollider2D;
     private Animator anim;
+    private AudioPlayer audioPlayer;
     private void Awake()
     {
         boxCollider2D = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
+        audioPlayer = FindFirstObjectByType<AudioPlayer>();
     }
     private void Update()
     {
@@ -34,8 +36,8 @@ public class Projectile : MonoBehaviour
         hit = true;
         boxCollider2D.enabled = false;
         anim.SetTrigger("Explode");
-        
-        if(collision.tag == "Enemy")
+        audioPlayer.PlayMagicOrbHitClip();
+        if (collision.tag == "Enemy")
         {
             collision.GetComponent<Health>().TakeDamage(1);
         }

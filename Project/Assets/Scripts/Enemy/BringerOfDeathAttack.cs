@@ -14,7 +14,7 @@ public class BringerOfDeathAttack : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
 
     [Header("Spell Parameter")]
-    [SerializeField] private Transform target;
+    [SerializeField] private PlayerSwitch playerSwitch;
     [SerializeField] private GameObject[] projectilesPrefab;
 
     [Header("Player Layer")]
@@ -27,17 +27,21 @@ public class BringerOfDeathAttack : MonoBehaviour
     private Animator anim;
     private Health playerHealth;
     private Health enemyHealth;
+    private Transform target;
 
     private BringerOfDeathMovement movement;
+    private AudioPlayer audioPlayer;
     private void Awake()
     {
         baseDamage = damage;
         anim = GetComponent<Animator>();
         movement = GetComponent<BringerOfDeathMovement>();
         enemyHealth = GetComponentInParent<Health>();
+        audioPlayer = FindFirstObjectByType<AudioPlayer>();
     }
     void Update()
     {
+        CheckCurrentPlayer();
         meleeCooldownTimer += Time.deltaTime;
         rangeCooldownTimer += Time.deltaTime;
         if (PlayerInSight())
@@ -62,9 +66,21 @@ public class BringerOfDeathAttack : MonoBehaviour
             enemyHealth.TakeDamage(9999);
         }
     }
+    void CheckCurrentPlayer()
+    {
+        if (playerSwitch.GetPlayer1Active())
+        {
+            target = playerSwitch.GetPlayer1().transform;
+        }
+        else
+        {
+            target = playerSwitch.GetPlayer2().transform;
+        }
+    }
     void Attack()
     {
         anim.SetTrigger("Attack");
+        audioPlayer.PlaySlashCLip();
     }
     void Cast()
     {

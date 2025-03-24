@@ -3,11 +3,11 @@ using UnityEngine;
 public class GreatswordSkeletonMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 2f;
-    [SerializeField] private Transform target;
+    [SerializeField] private PlayerSwitch playerSwitch;
     [SerializeField] private int initialDirection;
     private Animator anim;
     private Rigidbody2D rb;
-
+    private Transform target;
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -16,8 +16,20 @@ public class GreatswordSkeletonMovement : MonoBehaviour
 
     private void Update()
     {
+        CheckCurrentPlayer();
         FlipSprite();
         Move();
+    }
+    void CheckCurrentPlayer()
+    {
+        if (playerSwitch.GetPlayer1Active())
+        {
+            target = playerSwitch.GetPlayer1().transform;
+        }
+        else
+        {
+            target = playerSwitch.GetPlayer2().transform;
+        }
     }
     private void Move()
     {

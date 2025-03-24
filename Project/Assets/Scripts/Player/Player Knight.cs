@@ -37,6 +37,7 @@ public class PlayerKnight : MonoBehaviour
     private Vector3 initScale;
     private BlockAndParry bap;
     private Health playerHealth;
+    private AudioPlayer audioPlayer;
     private void Awake()
     {
         initScale = transform.localScale;
@@ -54,6 +55,7 @@ public class PlayerKnight : MonoBehaviour
         base_speed = m_speed;
         bap = GetComponent<BlockAndParry>();
         playerHealth = GetComponent<Health>();
+        audioPlayer = FindFirstObjectByType<AudioPlayer>();
     }
 
     // Update is called once per frame
@@ -82,6 +84,7 @@ public class PlayerKnight : MonoBehaviour
         {
             m_grounded = true;
             m_animator.SetBool("Grounded", m_grounded);
+            audioPlayer.PlayLandCLip();
         }
 
         //Check if character just started falling
@@ -126,7 +129,7 @@ public class PlayerKnight : MonoBehaviour
 
             // Call one of three attack animations "Attack1", "Attack2", "Attack3"
             m_animator.SetTrigger("Attack" + m_currentAttack);
-
+            audioPlayer.PlaySlashCLip();
             // Reset timer
             m_timeSinceAttack = 0.0f;
         }
@@ -210,6 +213,7 @@ public class PlayerKnight : MonoBehaviour
     void Jump()
     {
         m_animator.SetTrigger("Jump");
+        audioPlayer.PlayJumpCLip();
         m_grounded = false;
         m_animator.SetBool("Grounded", m_grounded);
         m_body2d.linearVelocity = new Vector2(m_body2d.linearVelocity.x, m_jumpForce);

@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GreatswordSkeletonSwitch : MonoBehaviour
 {
     [SerializeField] private float Health = 80f;
     [SerializeField] private GameObject[] enemyObjects;
     [SerializeField] private float switchCooldown = 10f;
+    [SerializeField] private Slider slider;
 
     private float currentHealth;
     private float switchTimer = 0f;
@@ -16,40 +18,40 @@ public class GreatswordSkeletonSwitch : MonoBehaviour
     private Collider2D playerCollider;
     private void Awake()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerCollider = player.GetComponent<Collider2D>();
+    }
+
+    void Start()
+    {
         currentHealth = Health;
         if (enemyObjects.Length == 0)
         {
             Debug.LogWarning("No enemy objects assigned!");
             return;
         }
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        playerCollider = player.GetComponent<Collider2D>();
         foreach (GameObject enemy in enemyObjects)
         {
-            var attack = enemy.GetComponent<GreatswordSkeletonAttack>();
-            var movement = enemy.GetComponent<GreatswordSkeletonMovement>();
+            var attack1 = enemy.GetComponent<GreatswordSkeletonAttack>();
+            var movement1 = enemy.GetComponent<GreatswordSkeletonMovement>();
             var health = enemy.GetComponent<Health>();
-            var collider = enemy.GetComponent<Collider2D>();
-            var anim = enemy.GetComponent<Animator>();
+            var collider1 = enemy.GetComponent<Collider2D>();
+            var anim1 = enemy.GetComponent<Animator>();
 
-            if (attack) attack.enabled = false;
-            if (movement) movement.enabled = false;
+            if (attack1) attack1.enabled = false;
+            if (movement1) movement1.enabled = false;
             if (health) health.SetMaxHealth(currentHealth);
-            if (anim)
+            if (anim1)
             {
-                anim.SetTrigger("Death");
-                anim.SetBool("isDeath", true);
-                anim.SetBool("Grounded", true);
+                anim1.SetTrigger("Death");
+                anim1.SetBool("isDeath", true);
+                anim1.SetBool("Grounded", true);
             }
-            if (collider && playerCollider)
+            if (collider1 && playerCollider)
             {
-                Physics2D.IgnoreCollision(collider, playerCollider, true); // Re-enable collision
+                Physics2D.IgnoreCollision(collider1, playerCollider, true); // Re-enable collision
             }
         }
-    }
-
-    void Start()
-    {
         if (enemyObjects.Length == 0) return; // Safety check
 
         // Disable all Health components first
@@ -84,6 +86,7 @@ public class GreatswordSkeletonSwitch : MonoBehaviour
     }
     private void Update()
     {
+        slider.value = currentHealth / Health;
         switchTimer += Time.deltaTime;
         if (switchTimer >= switchCooldown)
         {
@@ -188,5 +191,9 @@ public class GreatswordSkeletonSwitch : MonoBehaviour
         }
 
         Debug.Log($"Shared Health: {currentHealth}");
+    }
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
     }
 }

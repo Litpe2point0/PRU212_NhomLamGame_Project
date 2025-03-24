@@ -16,7 +16,9 @@ public class PlayerSwitch : MonoBehaviour
     private Rigidbody2D rb2;
     private PlayerKnight controller1;
     private PlayerWizard controller2;
-
+    private bool isPlayer1Alive = true;
+    private bool isPlayer2Alive = true;
+    private bool once = false;
     private void Awake()
     {
         rb1 = player1.GetComponent<Rigidbody2D>();
@@ -32,9 +34,54 @@ public class PlayerSwitch : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T) && canSwitch)
+        CheckPlayerAlive();
+        if (Input.GetKeyDown(KeyCode.T) && canSwitch && isPlayer1Alive && isPlayer2Alive)
         {
             StartCoroutine(SwitchPlayer());
+        }
+        if (!isPlayer1Alive && isPlayer2Alive && !once)
+        {
+            player2.transform.position = new Vector3(
+                player1.transform.position.x,
+                player1.transform.position.y + 0.05f,
+                player1.transform.position.z
+                );
+
+            player2.transform.localScale = new Vector3(
+                Mathf.Sign(player1.transform.localScale.x) * player2.transform.localScale.x,
+                player2.transform.localScale.y,
+                player2.transform.localScale.z
+                );
+            player2.SetActive(true);
+            player2.GetComponent<PlayerWizard>().enabled = true;
+            player2.GetComponent<PlayerInput>().enabled = true;
+            cc.Follow = player2.transform;
+            cc.LookAt = player2.transform;
+
+            player1Active = (player2 == player1);
+            once = true;
+        }
+        if (!isPlayer2Alive && isPlayer1Alive && !once)
+        {
+            player1.transform.position = new Vector3(
+                player2.transform.position.x,
+                player2.transform.position.y + 0.05f,
+                player2.transform.position.z
+                );
+
+            player1.transform.localScale = new Vector3(
+                Mathf.Sign(player2.transform.localScale.x) * player1.transform.localScale.x,
+                player1.transform.localScale.y,
+                player1.transform.localScale.z
+                );
+            player1.SetActive(true);
+            player1.GetComponent<PlayerKnight>().enabled = true;
+            player1.GetComponent<PlayerInput>().enabled = true;
+            cc.Follow = player1.transform;
+            cc.LookAt = player1.transform;
+
+            player1Active = (player1 == player1);
+            once = true;
         }
     }
 
@@ -50,11 +97,23 @@ public class PlayerSwitch : MonoBehaviour
         {
             SwitchTo(player1, player2);
         }
-
         yield return new WaitForSeconds(switchCooldown);
         canSwitch = true;
     }
-
+    void CheckPlayerAlive()
+    {
+        if (player1.TryGetComponent<Health>(out Health player1Health) && player2.TryGetComponent<Health>(out Health player2Health))
+        {
+            if (player1Health.GetCurrentHealth() <= 0)
+            {
+                isPlayer1Alive = false;
+            }
+            if (player2Health.GetCurrentHealth() <= 0)
+            {
+                isPlayer2Alive = false;
+            }
+        }
+    }
     private void SwitchTo(GameObject newPlayer, GameObject oldPlayer)
     {
         // 🔹 RESET INPUT to avoid movement carry-over
@@ -75,7 +134,7 @@ public class PlayerSwitch : MonoBehaviour
             oldController.ResetInput();
             oldController.enabled = false; // Disable the input script
         }
-        else if(oldPlayer.TryGetComponent<PlayerWizard>(out PlayerWizard oldController2))
+        else if (oldPlayer.TryGetComponent<PlayerWizard>(out PlayerWizard oldController2))
         {
             oldController2.ResetInput();
             oldController2.enabled = false; // Disable the input script
@@ -147,5 +206,13 @@ public class PlayerSwitch : MonoBehaviour
     public bool GetPlayer1Active()
     {
         return player1Active;
+    }
+    public GameObject GetPlayer1()
+    {
+        return player1;
+    }
+    public GameObject GetPlayer2()
+    {
+        return player2;
     }
 }

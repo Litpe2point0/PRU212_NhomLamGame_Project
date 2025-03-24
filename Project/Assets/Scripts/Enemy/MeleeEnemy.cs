@@ -22,6 +22,7 @@ public class MeleeEnemy : MonoBehaviour
     private Animator anim;
     private Health playerHealth;
     private Health enemyHealth;
+    private AudioPlayer audioPlayer;
 
     private EnemyPatrol enemyPatrol;
     private void Awake()
@@ -30,6 +31,7 @@ public class MeleeEnemy : MonoBehaviour
         anim = GetComponent<Animator>();
         enemyPatrol = GetComponentInParent<EnemyPatrol>();
         enemyHealth = GetComponent<Health>();
+        audioPlayer = FindFirstObjectByType<AudioPlayer>();
     }
     void Update()
     {
@@ -40,6 +42,7 @@ public class MeleeEnemy : MonoBehaviour
             if (cooldownTimer >= attackCooldown)
             {
                 anim.SetTrigger(attackAnimation);
+                audioPlayer.PlaySlashCLip();
                 cooldownTimer = 0;
             }
         }
@@ -89,6 +92,7 @@ public class MeleeEnemy : MonoBehaviour
                 }
             }
             playerHealth.TakeDamage(damage);
+            audioPlayer.PlayHitCLip();
             damage = baseDamage;
         }
     }

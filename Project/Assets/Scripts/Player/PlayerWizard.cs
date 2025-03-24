@@ -22,6 +22,7 @@ public class PlayerWizard : MonoBehaviour
     private bool isOnSlope;
     private Vector3 initScale;
     private RangePlayer rangePlayer;
+    private AudioPlayer audioPlayer;
     private void Awake()
     {
         initScale = transform.localScale;
@@ -33,6 +34,7 @@ public class PlayerWizard : MonoBehaviour
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_PlayerKnight>();
         base_speed = m_speed;
+        audioPlayer = FindFirstObjectByType<AudioPlayer>();
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class PlayerWizard : MonoBehaviour
         {
             m_grounded = true;
             m_animator.SetBool("Grounded", m_grounded);
+            audioPlayer.PlayLandCLip();
         }
 
         //Check if character just started falling
@@ -72,6 +75,7 @@ public class PlayerWizard : MonoBehaviour
         {
             m_body2d.linearVelocityX = 0;
             m_animator.SetTrigger("Attack");
+            audioPlayer.PlayMagicOrbBlastClip();
             // Reset timer
             m_attackCooldownTimer = 0.0f;
         }
@@ -128,6 +132,7 @@ public class PlayerWizard : MonoBehaviour
     void Jump()
     {
         m_animator.SetTrigger("Jump");
+        audioPlayer.PlayJumpCLip();
         m_grounded = false;
         m_animator.SetBool("Grounded", m_grounded);
         m_body2d.linearVelocity = new Vector2(m_body2d.linearVelocity.x, m_jumpForce);

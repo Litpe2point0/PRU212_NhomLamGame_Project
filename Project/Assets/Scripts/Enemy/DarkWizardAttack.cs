@@ -18,7 +18,7 @@ public class DarkWizardAttack : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
 
     [Header("Spell Parameter")]
-    [SerializeField] private Transform target;
+    [SerializeField] private PlayerSwitch playerSwitch;
     [SerializeField] private GameObject[] projectilesPrefab;
 
     [Header("Player Layer")]
@@ -36,6 +36,8 @@ public class DarkWizardAttack : MonoBehaviour
     private bool isDisable = false;
     Rigidbody2D rb;
     private int stage = 1;
+    private Transform target;
+    private AudioPlayer audioPlayer;
 
     private DarkWizardMovement movement;
     private void Awake()
@@ -45,9 +47,11 @@ public class DarkWizardAttack : MonoBehaviour
         movement = GetComponent<DarkWizardMovement>();
         enemyHealth = GetComponentInParent<Health>();
         rb = GetComponent<Rigidbody2D>();
+        audioPlayer = FindFirstObjectByType<AudioPlayer>();
     }
     void Update()
     {
+        CheckCurrentPlayer();
         AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
         meleeCooldownTimer += Time.deltaTime;
         rangeCooldownTimer += Time.deltaTime;
@@ -91,13 +95,26 @@ public class DarkWizardAttack : MonoBehaviour
             Stage2();
         }
     }
+    void CheckCurrentPlayer()
+    {
+        if (playerSwitch.GetPlayer1Active())
+        {
+            target = playerSwitch.GetPlayer1().transform;
+        }
+        else
+        {
+            target = playerSwitch.GetPlayer2().transform;
+        }
+    }
     void Attack1()
     {
         anim.SetTrigger("Attack1");
+        audioPlayer.PlayMagicSpellClip();
     }
     void Attack2()
     {
         anim.SetTrigger("Attack2");
+        audioPlayer.PlayMagicSpellClip();
     }
     void Cast()
     {

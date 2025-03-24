@@ -22,10 +22,13 @@ public class DarkHandSpellAttack : MonoBehaviour
     private Animator anim;
     private Health playerHealth;
     private SpriteRenderer spriteRenderer;
+
+    private AudioPlayer audioPlayer;
     private void Awake()
     {
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioPlayer = FindFirstObjectByType<AudioPlayer>();
 
     }
     public void SetActivate()
@@ -35,6 +38,7 @@ public class DarkHandSpellAttack : MonoBehaviour
     }
     public void Activate()
     {
+        audioPlayer.PlayDarkHandSpellClip();
         StartCoroutine(FadeInAndAttack());
     }
     private IEnumerator FadeInAndAttack()

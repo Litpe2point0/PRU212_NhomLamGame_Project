@@ -15,6 +15,11 @@ public class MeleePlayer : MonoBehaviour
     [SerializeField] private LayerMask enemyMask;
 
     private Health enemyHealth;
+    private AudioPlayer audioPlayer;
+    private void Awake()
+    {
+        audioPlayer = FindFirstObjectByType<AudioPlayer>();
+    }
     private bool InRange()
     {
         RaycastHit2D hit = Physics2D.BoxCast(
@@ -43,7 +48,9 @@ public class MeleePlayer : MonoBehaviour
         {
             if (enemyHealth.GetComponent<Animator>() != null)
                 if (enemyHealth.GetComponent<Animator>().GetBool("isDeath")) return;
+            if (enemyHealth.IsDead()) return;
             enemyHealth.TakeDamage(damage);
+            audioPlayer.PlayHitCLip();
         }
     }
 }

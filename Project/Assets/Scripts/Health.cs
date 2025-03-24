@@ -21,11 +21,13 @@ public class Health : MonoBehaviour
     private bool isInvunerable = false;
     private SpriteRenderer spriteRenderer;
     private Animator anim;
+    private AudioPlayer audioPlayer;
     void Start()
     {
         anim = GetComponent<Animator>();
         currentHealth = health;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioPlayer = FindFirstObjectByType<AudioPlayer>();
     }
 
     // Update is called once per frame
@@ -67,8 +69,12 @@ public class Health : MonoBehaviour
                 {
                     GetComponent<PlayerKnight>().enabled = false;
                 }
+                if(GetComponent<PlayerWizard>() != null)
+                {
+                    GetComponent<PlayerWizard>().enabled = false;
+                }
                 //Enemy
-                if(GetComponent<MeleeEnemy>() != null)
+                if (GetComponent<MeleeEnemy>() != null)
                 {
                     GetComponent<MeleeEnemy>().enabled = false;
                 }

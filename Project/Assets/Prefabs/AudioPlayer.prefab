@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1018158581818391788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5100861994298277654}
+  - component: {fileID: 6131663108628162255}
+  m_Layer: 0
+  m_Name: AudioPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5100861994298277654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018158581818391788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 232.22998, y: 131.72522, z: -3.135566}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6131663108628162255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018158581818391788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e40ed5a5e44894ea843b7968708abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cc: {fileID: 0}
+  slashClip: {fileID: 8300000, guid: 2166cd0045b796e46a3400608469f483, type: 3}
+  hitClip: {fileID: 8300000, guid: c47655e3745edf840a68027a69c4e1db, type: 3}
+  jumpClip: {fileID: 8300000, guid: 2e51bfc329c282947be7d94ae6b8adee, type: 3}
+  landClip: {fileID: 8300000, guid: 096ca8919eb7c3f42ba4fbdfd2e1a764, type: 3}
+  magicOrbBlastClip: {fileID: 8300000, guid: 4e4f5abd58e5f1344999dc4ff2a79818, type: 3}
+  magicOrbHitClip: {fileID: 8300000, guid: 62e5e0fcd5ec6334abf75523920016ed, type: 3}
+  fireBreathingClip: {fileID: 8300000, guid: 3af0e43ac04fcd74381c065806760d16, type: 3}
+  magicSpellClip: {fileID: 8300000, guid: 5ce9ade1f5a990740b962e9bc10fc625, type: 3}
+  darkHandSpellClip: {fileID: 8300000, guid: c0512085786be8b4e8772330aeb89d01, type: 3}
