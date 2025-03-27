@@ -11,17 +11,21 @@ public class DarkWizardMovement : MonoBehaviour
     private bool m_grounded = false;
     private Transform target;
     private UIManager uiManager;
+    private Health health;
+    private bool isDead = false;
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        health = GetComponent<Health>();
         groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     private void Update()
     {
-        if(GetComponent<Health>().GetCurrentHealth() <= 0)
+        if (isDead) return;
+        if (GetComponent<Health>().GetCurrentHealth() <= 0)
         {
             uiManager.ShowWin();
         }
@@ -42,6 +46,7 @@ public class DarkWizardMovement : MonoBehaviour
 
         FlipSprite();
         Move();
+        CheckHealth();
     }
     void CheckCurrentPlayer()
     {
@@ -85,5 +90,26 @@ public class DarkWizardMovement : MonoBehaviour
     public int GetInitialDirection()
     {
         return initialDirection;
+    }
+    void CheckHealth()
+    {
+        if (health.GetCurrentHealth() <= 0 && !isDead)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        isDead = true;
+        anim.SetTrigger("Death");
+        anim.SetBool("isDeath", true);
+        Collider2D enemyCollider = GetComponent<Collider2D>();
+        Collider2D player1Collider = playerSwitch.GetPlayer1().GetComponent<Collider2D>();
+        Collider2D player2Collider = playerSwitch.GetPlayer2().GetComponent<Collider2D>();
+        Physics2D.IgnoreCollision(enemyCollider, player1Collider, true);
+        Physics2D.IgnoreCollision(enemyCollider, player2Collider, true);
+        StopAllCoroutines();
+        enabled = false;
     }
 }

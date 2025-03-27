@@ -64,6 +64,11 @@ public class BringerOfDeathAttack : MonoBehaviour
         if (boss.GetComponent<Health>().IsDead())
         {
             enemyHealth.TakeDamage(9999);
+            Collider2D enemyCollider = GetComponentInParent<Collider2D>();
+            Collider2D player1Collider = playerSwitch.GetPlayer1().GetComponent<Collider2D>();
+            Collider2D player2Collider = playerSwitch.GetPlayer2().GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(enemyCollider, player1Collider, true);
+            Physics2D.IgnoreCollision(enemyCollider, player2Collider, true);
         }
     }
     void CheckCurrentPlayer()
@@ -107,11 +112,12 @@ public class BringerOfDeathAttack : MonoBehaviour
             Vector2.right,
             0f,
             playerMask);
-        if (hit.collider != null)
+        if (hit.collider != null && hit.transform == target)
         {
             playerHealth = hit.transform.GetComponent<Health>();
+            return true;
         }
-        return hit.collider != null;
+        return false;
     }
     private void OnDrawGizmos()
     {

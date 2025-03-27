@@ -12,6 +12,7 @@ public class GreatswordSkeletonAttack : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
 
     [Header("Player Layer")]
+    [SerializeField] private PlayerSwitch playerSwitch;
     [SerializeField] private LayerMask playerMask;
 
     private float cooldownTimer = Mathf.Infinity;
@@ -20,7 +21,7 @@ public class GreatswordSkeletonAttack : MonoBehaviour
     private Health playerHealth;
     private Health enemyHealth;
     private int parryCount = 0;
-
+    private Transform target;
     private GreatswordSkeletonMovement movement;
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class GreatswordSkeletonAttack : MonoBehaviour
     }
     void Update()
     {
+        CheckCurrentPlayer();
         cooldownTimer += Time.deltaTime;
 
         if (PlayerInSight())
@@ -57,6 +59,17 @@ public class GreatswordSkeletonAttack : MonoBehaviour
         if (movement != null)
             movement.enabled = !PlayerInSight();
     }
+    void CheckCurrentPlayer()
+    {
+        if (playerSwitch.GetPlayer1Active())
+        {
+            target = playerSwitch.GetPlayer1().transform;
+        }
+        else
+        {
+            target = playerSwitch.GetPlayer2().transform;
+        }
+    }
     void Attack1()
     {
         anim.SetTrigger("Attack1");
@@ -78,11 +91,12 @@ public class GreatswordSkeletonAttack : MonoBehaviour
             Vector2.right,
             0f,
             playerMask);
-        if (hit.collider != null)
+        if (hit.collider != null && hit.transform == target)
         {
             playerHealth = hit.transform.GetComponent<Health>();
+            return true;
         }
-        return hit.collider != null;
+        return false;
     }
     private void OnDrawGizmos()
     {

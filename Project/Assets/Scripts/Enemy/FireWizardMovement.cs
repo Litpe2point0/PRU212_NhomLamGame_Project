@@ -26,10 +26,13 @@ public class FireWizardMovement : MonoBehaviour
     private FireWizardAttack attack;
     private Animator anim;
     private Transform player;
+    private bool isDead = false;
+    private Health health;
     private void Awake()
     {
         anim = GetComponent<Animator>();
         attack = GetComponent<FireWizardAttack>();
+        health = GetComponent<Health>();
     }
     private void Start()
     {
@@ -39,6 +42,8 @@ public class FireWizardMovement : MonoBehaviour
     }
     void Update()
     {
+        if (isDead) return;
+
         CheckCurrentPlayer();
         FlipSprite();
         if(!isAttacking)
@@ -58,6 +63,8 @@ public class FireWizardMovement : MonoBehaviour
             DiveAttack();
         }
         MoveForward();
+
+        CheckHealth();
     }
     void CheckCurrentPlayer()
     {
@@ -147,5 +154,27 @@ public class FireWizardMovement : MonoBehaviour
     public void SetIsAttacking(bool value)
     {
         isAttacking = value;
+    }
+    void CheckHealth()
+    {
+        if (health.GetCurrentHealth() <= 0 && !isDead)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        isDead = true;
+        anim.SetTrigger("Death");
+        anim.SetBool("isDeath", true);
+        GetComponent<Rigidbody2D>().gravityScale = 1;
+        Collider2D enemyCollider = GetComponent<Collider2D>();
+        Collider2D player1Collider = playerSwitch.GetPlayer1().GetComponent<Collider2D>();
+        Collider2D player2Collider = playerSwitch.GetPlayer2().GetComponent<Collider2D>();
+        Physics2D.IgnoreCollision(enemyCollider, player1Collider, true);
+        Physics2D.IgnoreCollision(enemyCollider, player2Collider, true);
+        StopAllCoroutines();
+        enabled = false;
     }
 }

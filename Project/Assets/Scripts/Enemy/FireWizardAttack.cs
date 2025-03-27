@@ -13,6 +13,7 @@ public class FireWizardAttack : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
 
     [Header("Player Layer")]
+    [SerializeField] private PlayerSwitch playerSwitch;
     [SerializeField] private LayerMask playerMask;
 
     public float cooldownTimer = Mathf.Infinity;
@@ -20,11 +21,27 @@ public class FireWizardAttack : MonoBehaviour
     private Animator anim;
     private Health playerHealth;
     private AudioPlayer audioPlayer;
+    private Transform target;
     private void Awake()
     {
         baseDamage = damage;
         anim = GetComponent<Animator>();
         audioPlayer = FindFirstObjectByType<AudioPlayer>();
+    }
+    private void Update()
+    {
+        CheckCurrentPlayer();
+    }
+    void CheckCurrentPlayer()
+    {
+        if (playerSwitch.GetPlayer1Active())
+        {
+            target = playerSwitch.GetPlayer1().transform;
+        }
+        else
+        {
+            target = playerSwitch.GetPlayer2().transform;
+        }
     }
     private bool PlayerInSight()
     {
@@ -35,11 +52,12 @@ public class FireWizardAttack : MonoBehaviour
             Vector2.right,
             0f,
             playerMask);
-        if (hit.collider != null)
+        if (hit.collider != null && hit.transform == target)
         {
             playerHealth = hit.transform.GetComponent<Health>();
+            return true;
         }
-        return hit.collider != null;
+        return false;
     }
     private void OnDrawGizmos()
     {

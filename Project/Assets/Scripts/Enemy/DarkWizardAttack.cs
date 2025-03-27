@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class DarkWizardAttack : MonoBehaviour
 {
@@ -188,11 +187,12 @@ public class DarkWizardAttack : MonoBehaviour
             Vector2.right,
             0f,
             playerMask);
-        if (hit.collider != null)
+        if (hit.collider != null && hit.transform == target)
         {
             playerHealth = hit.transform.GetComponent<Health>();
+            return true;
         }
-        return hit.collider != null;
+        return false;
     }
     private void OnDrawGizmos()
     {

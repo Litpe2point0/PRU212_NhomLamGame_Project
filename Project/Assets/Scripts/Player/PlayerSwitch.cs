@@ -16,15 +16,18 @@ public class PlayerSwitch : MonoBehaviour
     private Rigidbody2D rb2;
     private PlayerKnight controller1;
     private PlayerWizard controller2;
-    private bool isPlayer1Alive = true;
-    private bool isPlayer2Alive = true;
+    public bool isPlayer1Alive = true;
+    public bool isPlayer2Alive = true;
     private bool once = false;
+    private bool once2 = false;
+    private UIManager uiManager;
     private void Awake()
     {
         rb1 = player1.GetComponent<Rigidbody2D>();
         rb2 = player2.GetComponent<Rigidbody2D>();
         controller1 = player1.GetComponent<PlayerKnight>();
         controller2 = player2.GetComponent<PlayerWizard>();
+        uiManager = FindFirstObjectByType<UIManager>();
     }
 
     void Start()
@@ -58,7 +61,7 @@ public class PlayerSwitch : MonoBehaviour
             cc.Follow = player2.transform;
             cc.LookAt = player2.transform;
 
-            player1Active = (player2 == player1);
+            player1Active = false;
             once = true;
         }
         if (!isPlayer2Alive && isPlayer1Alive && !once)
@@ -80,8 +83,15 @@ public class PlayerSwitch : MonoBehaviour
             cc.Follow = player1.transform;
             cc.LookAt = player1.transform;
 
-            player1Active = (player1 == player1);
+            player1Active = true;
             once = true;
+        }
+        if(!isPlayer1Alive && !isPlayer2Alive && !once2)
+        {
+            player1.GetComponent<Rigidbody2D>().linearVelocityX = 0;
+            player2.GetComponent<Rigidbody2D>().linearVelocityX = 0;
+            uiManager.ShowGameOver();
+            once2 = true;
         }
     }
 

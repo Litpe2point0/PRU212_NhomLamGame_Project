@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -88,7 +87,7 @@ public class GreatswordSkeletonSwitch : MonoBehaviour
     {
         slider.value = currentHealth / Health;
         switchTimer += Time.deltaTime;
-        if (switchTimer >= switchCooldown)
+        if (switchTimer >= switchCooldown && currentHealth > 0)
         {
             switchTimer = 0;
             SwitchEnemy(enemyCount);

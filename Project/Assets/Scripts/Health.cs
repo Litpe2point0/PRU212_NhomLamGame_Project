@@ -74,6 +74,10 @@ public class Health : MonoBehaviour
                     GetComponent<PlayerWizard>().enabled = false;
                 }
                 //Enemy
+                if(GetComponent<FireWizardAttack>() != null)
+                {
+                    GetComponent<FireWizardAttack>().enabled = false;
+                }
                 if (GetComponent<MeleeEnemy>() != null)
                 {
                     GetComponent<MeleeEnemy>().enabled = false;

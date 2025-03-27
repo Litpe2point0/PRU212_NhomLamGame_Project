@@ -70,6 +70,10 @@ public class AudioPlayer : MonoBehaviour
             PlayClip(fireBreathingClip, 0.7f);
         }
     }
+    public void StopPlayingFireBreathingClip()
+    {
+
+    }
     public void PlayMagicSpellClip()
     {
         if (magicSpellClip != null)
