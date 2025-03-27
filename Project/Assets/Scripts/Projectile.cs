@@ -3,6 +3,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed;
+    private float damage = 1f;
     private float direction;
     private bool hit;
     private float lifeTime;
@@ -31,6 +32,10 @@ public class Projectile : MonoBehaviour
             Deactivate();
         }
     }
+    public void SetDamage(float value)
+    {
+        damage = value;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         hit = true;
@@ -39,7 +44,7 @@ public class Projectile : MonoBehaviour
         audioPlayer.PlayMagicOrbHitClip();
         if (collision.tag == "Enemy")
         {
-            collision.GetComponent<Health>().TakeDamage(1);
+            collision.GetComponent<Health>().TakeDamage(damage);
         }
     }
     public void SetDirection(float _direction)

@@ -23,6 +23,7 @@ public class GreatswordSkeletonAttack : MonoBehaviour
     private int parryCount = 0;
     private Transform target;
     private GreatswordSkeletonMovement movement;
+    private bool isActive = false;
     private void Awake()
     {
         baseDamage = damage;
@@ -32,6 +33,7 @@ public class GreatswordSkeletonAttack : MonoBehaviour
     }
     void Update()
     {
+        if(!isActive || enemyHealth.IsDead()) return;
         CheckCurrentPlayer();
         cooldownTimer += Time.deltaTime;
 
@@ -58,6 +60,10 @@ public class GreatswordSkeletonAttack : MonoBehaviour
         }
         if (movement != null)
             movement.enabled = !PlayerInSight();
+    }
+    public void SetIsActive(bool value)
+    {
+        isActive = value;
     }
     void CheckCurrentPlayer()
     {

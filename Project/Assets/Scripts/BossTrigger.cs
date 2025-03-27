@@ -10,6 +10,7 @@ public class BossTrigger : MonoBehaviour
     [SerializeField] private Collider2D newConfiner;
     [SerializeField] private GameObject[] bossObjects;
 
+    private bool once = false;
     void Start()
     {
         foreach (GameObject bossObject in bossObjects)
@@ -20,7 +21,7 @@ public class BossTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !once)
         {
             cinemachineConfiner.BoundingShape2D = newConfiner;
             cinemachineConfiner.InvalidateBoundingShapeCache(); // Refresh the confiner
@@ -34,14 +35,24 @@ public class BossTrigger : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !once)
         {
-            GetComponent<BoxCollider2D>().isTrigger = false;
+            BoxCollider2D[] colliders = GetComponents<BoxCollider2D>();
+            foreach (BoxCollider2D collider in colliders)
+            {
+                collider.isTrigger = false;
+            }
+            once = true;
         }
     }
     public void SwitchBounderBack()
     {
         cinemachineConfiner.BoundingShape2D = originalConfiner;
         cinemachineConfiner.InvalidateBoundingShapeCache();
+        BoxCollider2D[] colliders = GetComponents<BoxCollider2D>();
+        foreach (BoxCollider2D collider in colliders)
+        {
+            collider.isTrigger = true;
+        }
     }
 }

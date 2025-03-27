@@ -4,10 +4,14 @@ public class RangePlayer : MonoBehaviour
 {
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject[] projectilesPrefab;
+    [SerializeField] private float damage;
 
     private void Awake()
     {
-
+        foreach(var ob in projectilesPrefab)
+        {
+            ob.GetComponent<Projectile>().SetDamage(damage);
+        }
     }
     public void Attack()
     {

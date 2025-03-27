@@ -1,4 +1,6 @@
+using System.Linq;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class GreatswordSkeletonMovement : MonoBehaviour
 {
@@ -8,17 +10,73 @@ public class GreatswordSkeletonMovement : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
     private Transform target;
+    private bool isDead = false;
+    private Health health;
+    private bool isActive = false;
+    public bool ignore = false;
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        health = GetComponent<Health>();
     }
 
     private void Update()
     {
+        SetProjectileCollisions();
+        if (isDead) return;
         CheckCurrentPlayer();
-        FlipSprite();
-        Move();
+        if(isActive)
+        {
+            FlipSprite();
+            Move();
+        }
+        CheckHealth();
+    }
+    public void SetIsActive(bool value)
+    {
+        isActive = value;
+    }
+    void SetProjectileCollisions()
+    {
+        GameObject holder = GameObject.FindGameObjectWithTag("PlayerProjectile");
+
+        if (holder != null)
+        {
+            Collider2D enemyCollider = GetComponent<Collider2D>();
+
+            foreach (Transform child in holder.transform)
+            {
+                if (child.gameObject.activeInHierarchy) // Only active projectiles
+                {
+                    Collider2D projectileCollider = child.GetComponent<Collider2D>();
+                    if (projectileCollider != null)
+                    {
+                        Physics2D.IgnoreCollision(enemyCollider, projectileCollider, ignore);
+                    }
+                }
+            }
+        }
+    }
+    public void SetCollision(bool value)
+    {
+        if (value)
+        {
+            Collider2D enemyCollider = GetComponent<Collider2D>();
+            Collider2D player1Collider = playerSwitch.GetPlayer1().GetComponent<Collider2D>();
+            Collider2D player2Collider = playerSwitch.GetPlayer2().GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(enemyCollider, player1Collider, false);
+            Physics2D.IgnoreCollision(enemyCollider, player2Collider, false);
+            ignore = false;
+        } else
+        {
+            Collider2D enemyCollider = GetComponent<Collider2D>();
+            Collider2D player1Collider = playerSwitch.GetPlayer1().GetComponent<Collider2D>();
+            Collider2D player2Collider = playerSwitch.GetPlayer2().GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(enemyCollider, player1Collider, true);
+            Physics2D.IgnoreCollision(enemyCollider, player2Collider, true);
+            ignore = true;
+        }
     }
     void CheckCurrentPlayer()
     {
@@ -62,5 +120,21 @@ public class GreatswordSkeletonMovement : MonoBehaviour
     public int GetInitialDirection()
     {
         return initialDirection;
+    }
+    void CheckHealth()
+    {
+        if (health.GetCurrentHealth() <= 0 && !isDead)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        isDead = true;
+        anim.SetTrigger("Death");
+        anim.SetBool("isDeath", true);
+        GetComponent<Rigidbody2D>().gravityScale = 1;
+        SetCollision(false);
     }
 }

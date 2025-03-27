@@ -246,9 +246,13 @@ PrefabInstance:
       propertyPath: speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5054691562257970017, guid: e6ba8da1e9f72e6488c32a1ce557a58f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6145527485423384605, guid: e6ba8da1e9f72e6488c32a1ce557a58f, type: 3}
       propertyPath: m_Name
-      value: EnemyPatrol Variant
+      value: Goblin Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7393278747859190310, guid: e6ba8da1e9f72e6488c32a1ce557a58f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -289,6 +293,10 @@ PrefabInstance:
     - target: {fileID: 7393278747859190310, guid: e6ba8da1e9f72e6488c32a1ce557a58f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968321009038973173, guid: e6ba8da1e9f72e6488c32a1ce557a58f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

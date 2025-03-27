@@ -15,6 +15,7 @@ public class MeleeEnemy : MonoBehaviour
     [SerializeField] private BoxCollider2D boxCollider;
 
     [Header("Player Layer")]
+    [SerializeField] private PlayerSwitch playerSwitch;
     [SerializeField] private LayerMask playerMask;
 
     private float cooldownTimer = Mathf.Infinity;
@@ -23,8 +24,9 @@ public class MeleeEnemy : MonoBehaviour
     private Health playerHealth;
     private Health enemyHealth;
     private AudioPlayer audioPlayer;
-
+    private Transform target;
     private EnemyPatrol enemyPatrol;
+    private bool ignore = false;
     private void Awake()
     {
         baseDamage = damage;
@@ -35,8 +37,10 @@ public class MeleeEnemy : MonoBehaviour
     }
     void Update()
     {
+        SetProjectileCollisions();
+        if (enemyHealth.IsDead()) return;
         cooldownTimer += Time.deltaTime;
-
+        CheckCurrentPlayer();
         if (PlayerInSight())
         {
             if (cooldownTimer >= attackCooldown)
@@ -49,6 +53,59 @@ public class MeleeEnemy : MonoBehaviour
         if (enemyPatrol != null)
             enemyPatrol.enabled = !PlayerInSight();
     }
+    void SetProjectileCollisions()
+    {
+        GameObject holder = GameObject.FindGameObjectWithTag("PlayerProjectile");
+
+        if (holder != null)
+        {
+            Collider2D enemyCollider = GetComponent<Collider2D>();
+
+            foreach (Transform child in holder.transform)
+            {
+                if (child.gameObject.activeInHierarchy) // Only active projectiles
+                {
+                    Collider2D projectileCollider = child.GetComponent<Collider2D>();
+                    if (projectileCollider != null)
+                    {
+                        Physics2D.IgnoreCollision(enemyCollider, projectileCollider, ignore);
+                    }
+                }
+            }
+        }
+    }
+    public void SetCollision(bool value)
+    {
+        if (value)
+        {
+            Collider2D enemyCollider = GetComponent<Collider2D>();
+            Collider2D player1Collider = playerSwitch.GetPlayer1().GetComponent<Collider2D>();
+            Collider2D player2Collider = playerSwitch.GetPlayer2().GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(enemyCollider, player1Collider, false);
+            Physics2D.IgnoreCollision(enemyCollider, player2Collider, false);
+            ignore = false;
+        }
+        else
+        {
+            Collider2D enemyCollider = GetComponent<Collider2D>();
+            Collider2D player1Collider = playerSwitch.GetPlayer1().GetComponent<Collider2D>();
+            Collider2D player2Collider = playerSwitch.GetPlayer2().GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(enemyCollider, player1Collider, true);
+            Physics2D.IgnoreCollision(enemyCollider, player2Collider, true);
+            ignore = true;
+        }
+    }
+    void CheckCurrentPlayer()
+    {
+        if (playerSwitch.GetPlayer1Active())
+        {
+            target = playerSwitch.GetPlayer1().transform;
+        }
+        else
+        {
+            target = playerSwitch.GetPlayer2().transform;
+        }
+    }
     private bool PlayerInSight()
     {
         RaycastHit2D hit = Physics2D.BoxCast(
@@ -58,11 +115,12 @@ public class MeleeEnemy : MonoBehaviour
             Vector2.right,
             0f,
             playerMask);
-        if (hit.collider != null)
+        if (hit.collider != null && hit.transform == target)
         {
             playerHealth = hit.transform.GetComponent<Health>();
+            return true;
         }
-        return hit.collider != null;
+        return false;
     }
     private void OnDrawGizmos()
     {

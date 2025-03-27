@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class FireWizardMovement : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class FireWizardMovement : MonoBehaviour
     private Transform player;
     private bool isDead = false;
     private Health health;
+    private bool ignore = false;
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -42,6 +44,7 @@ public class FireWizardMovement : MonoBehaviour
     }
     void Update()
     {
+        SetProjectileCollisions();
         if (isDead) return;
 
         CheckCurrentPlayer();
@@ -174,7 +177,29 @@ public class FireWizardMovement : MonoBehaviour
         Collider2D player2Collider = playerSwitch.GetPlayer2().GetComponent<Collider2D>();
         Physics2D.IgnoreCollision(enemyCollider, player1Collider, true);
         Physics2D.IgnoreCollision(enemyCollider, player2Collider, true);
+        ignore = true;
         StopAllCoroutines();
         enabled = false;
+    }
+    void SetProjectileCollisions()
+    {
+        GameObject holder = GameObject.FindGameObjectWithTag("PlayerProjectile");
+
+        if (holder != null)
+        {
+            Collider2D enemyCollider = GetComponent<Collider2D>();
+
+            foreach (Transform child in holder.transform)
+            {
+                if (child.gameObject.activeInHierarchy) // Only active projectiles
+                {
+                    Collider2D projectileCollider = child.GetComponent<Collider2D>();
+                    if (projectileCollider != null)
+                    {
+                        Physics2D.IgnoreCollision(enemyCollider, projectileCollider, ignore);
+                    }
+                }
+            }
+        }
     }
 }

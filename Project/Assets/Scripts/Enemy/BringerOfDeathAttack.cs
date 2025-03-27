@@ -1,4 +1,6 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.SocialPlatforms;
 
 public class BringerOfDeathAttack : MonoBehaviour
 {
@@ -69,6 +71,9 @@ public class BringerOfDeathAttack : MonoBehaviour
             Collider2D player2Collider = playerSwitch.GetPlayer2().GetComponent<Collider2D>();
             Physics2D.IgnoreCollision(enemyCollider, player1Collider, true);
             Physics2D.IgnoreCollision(enemyCollider, player2Collider, true);
+            int enemyLayer = LayerMask.NameToLayer("Enemy");
+            int projectileLayer = LayerMask.NameToLayer("PlayerProjectile");
+            Physics2D.IgnoreLayerCollision(enemyLayer, projectileLayer, true);
         }
     }
     void CheckCurrentPlayer()

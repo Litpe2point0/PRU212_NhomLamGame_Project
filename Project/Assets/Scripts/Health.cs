@@ -63,7 +63,6 @@ public class Health : MonoBehaviour
             if(!isDead)
             {
                 anim.SetTrigger("Death");
-                Physics2D.IgnoreLayerCollision(7, 10, true);
                 //Player
                 if (GetComponent<PlayerKnight>() != null)
                 {
@@ -80,7 +79,7 @@ public class Health : MonoBehaviour
                 }
                 if (GetComponent<MeleeEnemy>() != null)
                 {
-                    GetComponent<MeleeEnemy>().enabled = false;
+                    GetComponent<MeleeEnemy>().SetCollision(false);
                 }
                 if(GetComponent<EnemyPatrol>() != null)
                 {
@@ -92,7 +91,7 @@ public class Health : MonoBehaviour
                 }
                 if (GetComponent<GreatswordSkeletonMovement>() != null)
                 {
-                    GetComponent<GreatswordSkeletonMovement>().enabled = false;
+                    GetComponent<GreatswordSkeletonMovement>().SetCollision(false);
                 }
                 if(GetComponent<BringerOfDeathAttack>() != null)
                 {
@@ -109,6 +108,18 @@ public class Health : MonoBehaviour
                 if (GetComponent<DarkWizardMovement>() != null)
                 {
                     GetComponent<DarkWizardMovement>().enabled = false;
+                }
+                if (GetComponent<SpearSkeletonMelee>() != null)
+                {
+                    GetComponent<SpearSkeletonMelee>().SetCollision(false);
+                }
+                if (GetComponent<HeavyBanditAttack>() != null)
+                {
+                    GetComponent<HeavyBanditAttack>().enabled = false;
+                }
+                if (GetComponent<HeavyBanditMovement>() != null)
+                {
+                    GetComponent<HeavyBanditMovement>().SetCollision(false);
                 }
                 isDead = true;
             }
@@ -130,6 +141,7 @@ public class Health : MonoBehaviour
     }
     public void Stun()
     {
+        GetComponent<Animator>().SetInteger("AnimState", 0);
         if (!isStunned)
         {
             isStunned = true;
@@ -171,6 +183,18 @@ public class Health : MonoBehaviour
             {
                 GetComponent<DarkWizardMovement>().enabled = false;
             }
+            if(GetComponent<SpearSkeletonMelee>() != null)
+            {
+                GetComponent<SpearSkeletonMelee>().enabled = false;
+            }
+            if(GetComponent<HeavyBanditAttack>() != null)
+            {
+                GetComponent<HeavyBanditAttack>().enabled = false;
+            }
+            if (GetComponent<HeavyBanditMovement>() != null)
+            {
+                GetComponent<HeavyBanditMovement>().enabled = false;
+            }
             StartStunEffect(stunDuration, flashSpeed);
             StartCoroutine(RecoverFromStun());
         }
@@ -180,6 +204,22 @@ public class Health : MonoBehaviour
     {
         yield return new WaitForSeconds(stunDuration);
         isStunned = false;
+        if (GetComponent<MeleeEnemy>() != null)
+        {
+            GetComponent<MeleeEnemy>().enabled = true;
+        }
+        if (GetComponent<GreatswordSkeletonMovement>() != null)
+        {
+            GetComponent<GreatswordSkeletonMovement>().enabled = true;
+        }
+        if (GetComponent<SpearSkeletonMelee>() != null)
+        {
+            GetComponent<SpearSkeletonMelee>().enabled = true;
+        }
+        if (GetComponent<HeavyBanditMovement>() != null)
+        {
+            GetComponent<HeavyBanditMovement>().enabled = true;
+        }
         if (!isDead)
         {
             if (GetComponent<PlayerKnight>() != null)
@@ -187,10 +227,6 @@ public class Health : MonoBehaviour
                 GetComponent<PlayerKnight>().enabled = true;
             }
             //Enemy
-            if (GetComponent<MeleeEnemy>() != null)
-            {
-                GetComponent<MeleeEnemy>().enabled = true;
-            }
             if (GetComponent<EnemyPatrol>() != null)
             {
                 GetComponent<EnemyPatrol>().enabled = true;
@@ -198,10 +234,6 @@ public class Health : MonoBehaviour
             if (GetComponent<GreatswordSkeletonAttack>() != null)
             {
                 GetComponent<GreatswordSkeletonAttack>().enabled = true;
-            }
-            if (GetComponent<GreatswordSkeletonMovement>() != null)
-            {
-                GetComponent<GreatswordSkeletonMovement>().enabled = true;
             }
             if (GetComponent<BringerOfDeathAttack>() != null)
             {
@@ -218,6 +250,10 @@ public class Health : MonoBehaviour
             if (GetComponent<DarkWizardMovement>() != null)
             {
                 GetComponent<DarkWizardMovement>().enabled = true;
+            }
+            if (GetComponent<HeavyBanditAttack>() != null)
+            {
+                GetComponent<HeavyBanditAttack>().enabled = true;
             }
         }
     }
@@ -265,6 +301,69 @@ public class Health : MonoBehaviour
     public void SetCurrentHealth(float health)
     {
         currentHealth = health;
+        if(currentHealth <= 0)
+        {
+            anim.SetTrigger("Death");
+            //Player
+            if (GetComponent<PlayerKnight>() != null)
+            {
+                GetComponent<PlayerKnight>().enabled = false;
+            }
+            if (GetComponent<PlayerWizard>() != null)
+            {
+                GetComponent<PlayerWizard>().enabled = false;
+            }
+            //Enemy
+            if (GetComponent<FireWizardAttack>() != null)
+            {
+                GetComponent<FireWizardAttack>().enabled = false;
+            }
+            if (GetComponent<MeleeEnemy>() != null)
+            {
+                GetComponent<MeleeEnemy>().SetCollision(false);
+            }
+            if (GetComponent<EnemyPatrol>() != null)
+            {
+                GetComponentInParent<EnemyPatrol>().enabled = false;
+            }
+            if (GetComponent<GreatswordSkeletonAttack>() != null)
+            {
+                GetComponent<GreatswordSkeletonAttack>().enabled = false;
+            }
+            if (GetComponent<GreatswordSkeletonMovement>() != null)
+            {
+                GetComponent<GreatswordSkeletonMovement>().SetCollision(false);
+            }
+            if (GetComponent<BringerOfDeathAttack>() != null)
+            {
+                GetComponent<BringerOfDeathAttack>().enabled = false;
+            }
+            if (GetComponent<BringerOfDeathMovement>() != null)
+            {
+                GetComponent<BringerOfDeathMovement>().enabled = false;
+            }
+            if (GetComponent<DarkWizardAttack>() != null)
+            {
+                GetComponent<DarkWizardAttack>().enabled = false;
+            }
+            if (GetComponent<DarkWizardMovement>() != null)
+            {
+                GetComponent<DarkWizardMovement>().enabled = false;
+            }
+            if (GetComponent<SpearSkeletonMelee>() != null)
+            {
+                GetComponent<SpearSkeletonMelee>().SetCollision(false);
+            }
+            if (GetComponent<HeavyBanditAttack>() != null)
+            {
+                GetComponent<HeavyBanditAttack>().enabled = false;
+            }
+            if (GetComponent<HeavyBanditMovement>() != null)
+            {
+                GetComponent<HeavyBanditMovement>().SetCollision(false);
+            }
+            isDead = true;
+        }
     }
     public float GetCurrentHealth()
     {

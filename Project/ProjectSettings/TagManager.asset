@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Obstacle
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX
@@ -63,6 +64,9 @@ TagManager:
     locked: 0
   - name: Projectile
     uniqueID: 2026598631
+    locked: 0
+  - name: UI
+    uniqueID: 1018292199
     locked: 0
   m_RenderingLayers:
   - Default
