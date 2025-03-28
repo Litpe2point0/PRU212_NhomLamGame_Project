@@ -52559,6 +52559,10 @@ PrefabInstance:
       propertyPath: damage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1118901102665816078, guid: bcfbe66660ce8c045a12be34757ba5b7, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 315361145}
     - target: {fileID: 5309685533821373049, guid: bcfbe66660ce8c045a12be34757ba5b7, type: 3}
       propertyPath: m_Name
       value: HeavyBanditEnemyPatrol Variant
@@ -52777,7 +52781,7 @@ PrefabInstance:
       objectReference: {fileID: 315361145}
     - target: {fileID: 5547023870326708660, guid: c24b1c7c0cbce7144b12c823b0d01e66, type: 3}
       propertyPath: Health
-      value: 2
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -52813,6 +52817,10 @@ PrefabInstance:
       propertyPath: damage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1118901102665816078, guid: bcfbe66660ce8c045a12be34757ba5b7, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 315361145}
     - target: {fileID: 2298171000296820416, guid: bcfbe66660ce8c045a12be34757ba5b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.74
@@ -53837,6 +53845,10 @@ PrefabInstance:
       propertyPath: damage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1118901102665816078, guid: bcfbe66660ce8c045a12be34757ba5b7, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 315361145}
     - target: {fileID: 5309685533821373049, guid: bcfbe66660ce8c045a12be34757ba5b7, type: 3}
       propertyPath: m_Name
       value: HeavyBanditEnemyPatrol Variant (1)
@@ -62145,7 +62157,7 @@ PrefabInstance:
       objectReference: {fileID: 315361145}
     - target: {fileID: 6112984689406076806, guid: 535bd0b2efba05b43b8a0eb375132f44, type: 3}
       propertyPath: Health
-      value: 2
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 6175924433583985050, guid: 535bd0b2efba05b43b8a0eb375132f44, type: 3}
       propertyPath: playerSwitch

@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomPatrol Variant (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3895304949272581800, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     - target: {fileID: 3975766944995201252, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.09
@@ -268,6 +272,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.84
       objectReference: {fileID: 0}
+    - target: {fileID: 8647910134765516214, guid: b8412b85a218a0b41b0887be7278abba, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -475,6 +483,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomPatrol Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3895304949272581800, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     - target: {fileID: 4681637135214841075, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.94
@@ -504,6 +516,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 380793805183237362, guid: 6134402dedffcb94c8e921bb18e8c128, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     - target: {fileID: 836942349883773583, guid: 6134402dedffcb94c8e921bb18e8c128, type: 3}
       propertyPath: m_Name
       value: LightBanditEnemyPatrol
@@ -629,6 +645,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomPatrol Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3895304949272581800, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     - target: {fileID: 3975766944995201252, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.09
@@ -873,6 +893,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomPatrol Variant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3895304949272581800, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     - target: {fileID: 3975766944995201252, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.09
@@ -954,6 +978,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomPatrol Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3895304949272581800, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     - target: {fileID: 4681637135214841075, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.94
@@ -1242,6 +1270,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomPatrol Variant (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3895304949272581800, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     - target: {fileID: 3975766944995201252, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.09
@@ -1400,6 +1432,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -3.68
       objectReference: {fileID: 0}
+    - target: {fileID: 8647910134765516214, guid: b8412b85a218a0b41b0887be7278abba, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1549,6 +1585,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 380793805183237362, guid: 6134402dedffcb94c8e921bb18e8c128, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     - target: {fileID: 836942349883773583, guid: 6134402dedffcb94c8e921bb18e8c128, type: 3}
       propertyPath: m_Name
       value: LightBanditEnemyPatrol (1)
@@ -17012,6 +17052,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomPatrol Variant (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 3895304949272581800, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     - target: {fileID: 3975766944995201252, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.09
@@ -22757,6 +22801,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomPatrol Variant (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3895304949272581800, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     - target: {fileID: 3975766944995201252, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.09
@@ -22915,6 +22963,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MushroomPatrol Variant (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3895304949272581800, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     - target: {fileID: 3975766944995201252, guid: c3c98738f262fcb4d935cb9b8dce0b54, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.09
@@ -23069,6 +23121,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.84
       objectReference: {fileID: 0}
+    - target: {fileID: 8647910134765516214, guid: b8412b85a218a0b41b0887be7278abba, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23215,6 +23271,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -3.61
       objectReference: {fileID: 0}
+    - target: {fileID: 8647910134765516214, guid: b8412b85a218a0b41b0887be7278abba, type: 3}
+      propertyPath: playerSwitch
+      value: 
+      objectReference: {fileID: 1764972854}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
